@@ -1,0 +1,9 @@
+svg {
+	margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+path {
+	stroke: #fff;
+}

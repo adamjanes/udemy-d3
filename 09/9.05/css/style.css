@@ -1,0 +1,15 @@
+svg {
+	margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+text {
+	font: 8px sans-serif;
+	text-anchor: middle;
+}
+
+.node--hover circle {
+	stroke: #000;
+	stroke-width: 1.2px;
+}

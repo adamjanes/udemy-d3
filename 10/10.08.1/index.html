@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <title>FreedomCorp Dashboard</title>
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img id="logo" src="img/logo.png"></a>      
+        </div>
+    </nav>
+
+    <!-- Bootstrap grid setup -->
+    <div class="container">
+        <div class="row">
+            <div id="left-charts" class="col-sm-12 col-md-8">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Dates: <span id="dateLabel1">01/01/2017</span> - <span id="dateLabel2">10/12/2017</span></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <select id="var-select" class="form-control">
+                            <option selected value="call_revenue">Revenue (USD)</option>
+                            <option value="call_duration">Call Time (seconds)</option>
+                            <option value="units_sold">Units Sold</option>
+                        </select>
+                    </div>                          
+                </div>
+                <div id="stacked-area"></div>
+                <div id="timeline"></div>
+            </div>
+            <div id="right-charts" class="col-md-4 col-sm-12">
+                <div class="row">
+                    <div class="col-sm-6 col-md-12" id="company-size"></div>
+                    <div class="col-sm-6 col-md-12" id="units-sold"></div>                    
+                    <div class="col-sm-6 col-md-12" id="revenue"></div>
+                    <div class="col-sm-6 col-md-12" id="call-duration"></div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- External JS Libraries -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/d3.min.js"></script>
+
+<!-- Custom JS -->
+<script src="js/stackedAreaChart.js"></script>
+<script src="js/barChart.js"></script>
+<script src="js/donutChart.js"></script>
+<script src="js/timeline.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

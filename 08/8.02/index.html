@@ -1,0 +1,71 @@
+<!-- 
+
+    Adapted from Mike Bostock at bl.ocks.org
+    https://bl.ocks.org/mbostock/3734333
+
+ -->
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <title>8.2 - Visualization around the globe</title>
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-default"></nav>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="//d3js.org/topojson.v2.min.js"></script>
+
+<script>
+
+    var width = 600,
+        height = 400;
+
+    var projection = d3.geoConicEqualArea()
+        .scale(153)
+        .translate([width / 2, height / 2])
+        .precision(.1);
+
+    var path = d3.geoPath()
+        .projection(projection);
+
+    var graticule = d3.geoGraticule();
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    d3.json("data/world-110m.json", function(error, world) {
+        if (error) throw error;
+
+        console.log(world)
+        console.log(topojson.feature(world, world.objects.land));
+        console.log(graticule)
+
+        svg.append("path")
+            .datum(topojson.feature(world, world.objects.land))
+            .attr("class", "land")
+            .attr("d", path);
+
+        svg.append("path")
+            .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+            .attr("class", "boundary")
+            .attr("d", path);
+
+        svg.append("path")
+            .datum(graticule)
+            .attr("class", "graticule")
+            .attr("d", path);
+    });
+
+    d3.select(self.frameElement).style("height", height + "px");
+
+</script>
+
+</body>

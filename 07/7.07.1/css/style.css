@@ -1,0 +1,25 @@
+svg {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+text {
+    font: 10px sans-serif;
+}
+
+form {
+    float:right;
+}
+
+label {
+    padding-right:10px;
+}
+
+input {
+    margin: 0 7px;
+}
