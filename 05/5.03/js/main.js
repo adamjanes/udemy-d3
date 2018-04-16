@@ -13,8 +13,8 @@ var g = d3.select("#chart-area")
     .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-            .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+    .append("g")
+        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
 var xAxisGroup = g.append("g")
     .attr("class", "x axis")
@@ -49,7 +49,7 @@ g.append("text")
     .attr("transform", "rotate(-90)")
     .text("Revenue");
 
-d3.json("data/revenues.json", function(data){
+d3.json("data/revenues.json").then(function(data){
     // console.log(data);
 
     // Clean data

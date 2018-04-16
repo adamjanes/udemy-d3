@@ -20,7 +20,7 @@
     <nav class="navbar navbar-default"></nav>
     <svg width="960" height="600"></svg>
 
-<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="//d3js.org/topojson.v2.min.js"></script>
 
@@ -75,26 +75,35 @@
       .select(".domain")
         .remove();
 
+/*  
+    Before V5
     d3.queue()
         .defer(d3.json, "https://d3js.org/us-10m.v1.json")
         .defer(d3.tsv, "data/map.tsv", function(d) { unemployment.set(d.id, +d.rate); })
         .await(ready);
+*/    
 
-    function ready(error, us) {
-        if (error) throw error;
+    var promises = [
+      d3.json("https://d3js.org/us-10m.v1.json"),
+      d3.tsv("data/map.tsv",  function(d) { unemployment.set(d.id, +d.rate); })
+    ]
 
-        console.log(us)
-        console.log(unemployment)
+    Promise.all(promises).then(function(data){
+        ready(data[0]);
+    }).catch(function(error){
+        console.log(error);
+    });
 
+    function ready(us) {
         svg.append("g")
             .attr("class", "counties")
             .selectAll("path")
-            .data(topojson.feature(us, us.objects.counties).features)
+                .data(topojson.feature(us, us.objects.counties).features)
             .enter().append("path")
                 .attr("fill", function(d) { return color(d.rate = unemployment.get(d.id)); })
                 .attr("d", path)
-                .append("title")
-                    .text(function(d) { return d.rate + "%"; });
+            .append("title")
+                .text(function(d) { return d.rate + "%"; });
 
         svg.append("path")
             .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))

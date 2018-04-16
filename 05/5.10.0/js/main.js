@@ -4,6 +4,6 @@
 *    Project 2 - Gapminder Clone
 */
 
-d3.json("data/data.json", function(data){
+d3.json("data/data.json").then(function(data){
 	console.log(data);
 })

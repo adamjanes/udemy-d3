@@ -16,7 +16,7 @@ var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
 var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.tsv("data.tsv", function(d) {
+d3.tsv("data.tsv").then(function(d) {
   d.frequency = +d.frequency;
   return d;
 }, function(error, data) {

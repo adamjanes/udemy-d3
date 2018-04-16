@@ -13,7 +13,7 @@ var filteredData = {};
 var donutData = [];
 var parseTime = d3.timeParse("%d/%m/%Y");
 var formatTime = d3.timeFormat("%d/%m/%Y");
-var color = d3.scaleOrdinal(d3.schemeCategory10);
+var color = d3.scaleOrdinal(d3.schemeDark2);
 
 // Event listeners
 $("#coin-select").on("change", function() {
@@ -64,7 +64,7 @@ function brushed() {
     lineChart.wrangleData();
 }
 
-d3.json("data/coins.json", function(data){
+d3.json("data/coins.json").then(function(data){
     // Prepare and clean data
     for (var coin in data) {
         if (!data.hasOwnProperty(coin)) {

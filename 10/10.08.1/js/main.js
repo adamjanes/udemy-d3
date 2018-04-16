@@ -7,7 +7,7 @@
 var parseTime = d3.timeParse("%d/%m/%Y");
 var formatTime = d3.timeFormat("%d/%m/%Y");
 
-d3.json("data/calls.json", function(data){    
+d3.json("data/calls.json").then(function(data){    
     
     data.map(function(d){
         d.call_revenue = +d.call_revenue

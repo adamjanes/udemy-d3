@@ -27,7 +27,7 @@ StackedAreaChart.prototype.initVis = function(){
 
     vis.t = () => { return d3.transition().duration(1000); }
 
-    vis.color = d3.scaleOrdinal(d3.schemeCategory20);
+    vis.color = d3.scaleOrdinal(d3.schemePastel1);
 
     vis.x = d3.scaleTime().range([0, vis.width]);
     vis.y = d3.scaleLinear().range([vis.height, 0]);

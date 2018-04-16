@@ -31,7 +31,7 @@ $("#date-slider").slider({
     }
 });
 
-d3.json("data/coins.json", function(data){
+d3.json("data/coins.json").then(function(data){
 
     // Prepare and clean data
     filteredData = {};

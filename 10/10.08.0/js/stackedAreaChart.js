@@ -26,7 +26,7 @@ var area = d3.area()
 var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.tsv("data.tsv", type, function(error, data) {
+d3.tsv("data.tsv", type).then(function(error, data) {
   if (error) throw error;
 
   var keys = data.columns.slice(1);

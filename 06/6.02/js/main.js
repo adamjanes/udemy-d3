@@ -10,8 +10,8 @@ var height = 500 - margin.top - margin.bottom,
 
 var g = d3.select("#chart-area")
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
     .append("g")
         .attr("transform", "translate(" + margin.left + 
             ", " + margin.top + ")");
@@ -29,7 +29,7 @@ var y = d3.scaleLinear()
 var area = d3.scaleLinear()
     .range([25*Math.PI, 1500*Math.PI])
     .domain([2000, 1400000000]);
-var continentColor = d3.scaleOrdinal(d3.schemeCategory20);
+var continentColor = d3.scaleOrdinal(d3.schemePastel1);
 
 // Labels
 var xLabel = g.append("text")
@@ -92,7 +92,7 @@ continents.forEach(function(continent, i){
         .text(continent);
 });
 
-d3.json("data/data.json", function(data){
+d3.json("data/data.json").then(function(data){
     console.log(data);
 
     // Clean data

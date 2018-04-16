@@ -11,11 +11,11 @@ var width = 600 - margin.left - margin.right,
 
 var g = d3.select("#chart-area")
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-            .attr("transform", "translate(" + margin.left + ", " 
-                + margin.top + ")");
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", "translate(" + margin.left 
+            + ", " + margin.top + ")");
 
 // X Label
 g.append("text")
@@ -36,7 +36,7 @@ g.append("text")
     .attr("transform", "rotate(-90)")
     .text("Height (m)");
 
-d3.json("data/buildings.json", function(data){
+d3.json("data/buildings.json").then(function(data){
     console.log(data);
 
     data.forEach(function(d){

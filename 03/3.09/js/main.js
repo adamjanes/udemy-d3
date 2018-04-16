@@ -12,12 +12,12 @@ var width = 600 - margin.left - margin.right,
 var g = d3.select("#chart-area")
     .append("svg")
         .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom);
-            .append("g")
-                .attr("transform", "translate(" + margin.left + ", " 
-                    + margin.top + ")")
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", "translate(" + margin.left 
+            + ", " + margin.top + ")")
 
-d3.json("data/buildings.json", function(data){
+d3.json("data/buildings.json").then(function(data){
     // console.log(data);
 
     data.forEach(function(d) {
@@ -43,10 +43,10 @@ d3.json("data/buildings.json", function(data){
         
     rects.enter()
         .append("rect")
-        .attr("y", 20)
-        .attr("x", function(d){ return x(d.name); })
-        .attr("width", x.bandwidth)
-        .attr("height", function(d){ return y(d.height); })
-        .attr("fill", "grey");
+            .attr("y", 0)
+            .attr("x", function(d){ return x(d.name); })
+            .attr("width", x.bandwidth)
+            .attr("height", function(d){ return y(d.height); })
+            .attr("fill", "grey");
 
 })

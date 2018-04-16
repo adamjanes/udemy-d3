@@ -4,16 +4,14 @@
 *    2.7 - Loading external data
 */
 
-var svg = d3.select("#chart-area").append("svg")
-    .attr("width", 400)
-    .attr("height", 400);
-
-d3.json("data/ages.json", function(error, data){
-    if (error) throw error;
-
+d3.tsv("data/age.tsv").then(function(data){
     data.forEach(function(d){
         d.age = +d.age;
-    })
+    });
+
+    var svg = d3.select("#chart-area").append("svg")
+        .attr("width", 400)
+        .attr("height", 400);
 
     var circles = svg.selectAll("circle")
         .data(data);
@@ -21,6 +19,7 @@ d3.json("data/ages.json", function(error, data){
     circles.enter()
         .append("circle")
             .attr("cx", function(d, i){
+                console.log(d);
                 return (i * 50) + 25;
             })
             .attr("cy", 25)
@@ -35,5 +34,6 @@ d3.json("data/ages.json", function(error, data){
                     return "red";
                 }
             });
-});
-
+}).catch(function(error){
+    console.log(error);
+})

@@ -10,10 +10,10 @@ var svg = d3.select("#chart-area")
     .attr("width", "400")
     .attr("height", "400");
 
-d3.json("data/buildings.json", function(data){
+d3.json("data/buildings.json").then(function(data){
     console.log(data);
 
-    data.forEach(d => {
+    data.forEach(function(d) {
         d.height = +d.height;
     });
 
@@ -31,19 +31,19 @@ d3.json("data/buildings.json", function(data){
         .range([0, 400]);
 
     var rects = svg.selectAll("rect")
-        .data(data)
+            .data(data)
         .enter()
-        .append("rect")
-        .attr("y", 20)
-        .attr("x", function(d){
-            return x(d.name);
-        })
-        .attr("width", x.bandwidth)
-        .attr("height", function(d){
-            return y(d.height);
-        })
-        .attr("fill", function(d) {
-            return "grey";
-        });
+            .append("rect")
+            .attr("y", 0)
+            .attr("x", function(d){
+                return x(d.name);
+            })
+            .attr("width", x.bandwidth)
+            .attr("height", function(d){
+                return y(d.height);
+            })
+            .attr("fill", function(d) {
+                return "grey";
+            });
 
 })

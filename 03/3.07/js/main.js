@@ -9,7 +9,7 @@ var svg = d3.select("#chart-area")
     .attr("width", "400")
     .attr("height", "400");
 
-d3.json("data/buildings.json", function(data){
+d3.json("data/buildings.json").then(function(data){
     console.log(data);
 
     data.forEach(d => {
@@ -34,7 +34,7 @@ d3.json("data/buildings.json", function(data){
         .data(data)
         .enter()
         .append("rect")
-        .attr("y", 20)
+        .attr("y", 0)
         .attr("x", function(d){
             return x(d.name);
         })
@@ -44,4 +44,4 @@ d3.json("data/buildings.json", function(data){
         })
         .attr("fill", "grey");
 
-})
+});

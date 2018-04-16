@@ -43,7 +43,7 @@
 
         // Add the links (given by calling tree(root), which also adds positional x/y coordinates) for the nodes
         var link = g.selectAll(".link")
-            .data(tree(root).links())
+                .data(tree(root).links())
             .enter().append("path")
                 .attr("class", "link")
                 .attr("d", d3.linkHorizontal()

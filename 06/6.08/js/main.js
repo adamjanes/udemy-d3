@@ -13,8 +13,8 @@ var svg = d3.select("#chart-area").append("svg")
     .attr("height", height + margin.top + margin.bottom);
 
 var g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + 
-            ", " + margin.top + ")");
+    .attr("transform", "translate(" + margin.left + 
+        ", " + margin.top + ")");
 
 // Time parser for x-scale
 var parseTime = d3.timeParse("%Y");
@@ -53,9 +53,7 @@ var line = d3.line()
     .x(function(d) { return x(d.year); })
     .y(function(d) { return y(d.value); });
 
-d3.json("data/example.json", function(error, data) {
-    if (error) throw error;
-
+d3.json("data/example.json").then(function(data) {
     // Data cleaning
     data.forEach(function(d) {
         d.year = parseTime(d.year);
