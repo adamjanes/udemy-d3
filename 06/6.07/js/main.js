@@ -180,6 +180,9 @@ function update(data) {
         }
     })
 
+    // ["A", "B", "C"] 1st
+    // ["B", "C"]
+
     // JOIN new data with old elements.
     var circles = g.selectAll("circle").data(data, function(d){
         return d.country;
