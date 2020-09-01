@@ -4,10 +4,10 @@
 *    2.7 - Loading external data
 */
 
-d3.tsv("data/ages.tsv").then(function(data){
-    data.forEach(function(d){
+d3.tsv("data/ages.tsv").then(function(data){ 
+   data.forEach(function(d){
         d.age = +d.age;
-    });
+    }) ;
 
     var svg = d3.select("#chart-area").append("svg")
         .attr("width", 400)
