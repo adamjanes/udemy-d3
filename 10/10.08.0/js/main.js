@@ -1,9 +1,9 @@
 /*
 *    main.js
 *    Mastering Data Visualization with D3.js
-*    FreedomCorp Dashboard
+*    Project 4 - FreedomCorp Dashboard
 */
 
-d3.json("data/calls.json").then(function(data){    
-    console.log(data)
+d3.json("data/calls.json").then(data => {    
+	console.log(data)
 })

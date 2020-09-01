@@ -4,39 +4,26 @@
 *    3.2 - Linear scales
 */
 
-var svg = d3.select("#chart-area")
-    .append("svg")
-        .attr("width", "400")
-        .attr("height", "400");
+const svg = d3.select("#chart-area").append("svg")
+  .attr("width", 400)
+  .attr("height", 400)
 
-d3.json("data/buildings.json").then(function(data){
-    console.log(data);
+d3.json("data/buildings.json").then(data => {
+  data.forEach(d => {
+    d.height = Number(d.height)
+  })
 
-    data.forEach(d => {
-        d.height = +d.height;
-    });
+  const y = d3.scaleLinear()
+    .domain([0, 828])
+    .range([0, 400])
 
-    var y = d3.scaleLinear()
-        .domain([0, 828])
-        .range([0, 400]);
-
-    var rects = svg.selectAll("rect")
-            .data(data)
-        .enter()
-            .append("rect")
-            .attr("y", 0)
-            .attr("x", function(d, i){
-                return (i * 60);
-            })
-            .attr("width", 40)
-            .attr("height", function(d){
-                return y(d.height);
-            })
-            .attr("fill", function(d) {
-                return "grey";
-            });
-
-});
-
-
-
+  const rects = svg.selectAll("rect")
+    .data(data)
+  
+  rects.enter().append("rect")
+    .attr("y", 0)
+    .attr("x", (d, i) => (i * 60))
+    .attr("width", 40)
+    .attr("height", d => y(d.height))
+    .attr("fill", "grey")
+})

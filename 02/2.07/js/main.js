@@ -4,36 +4,30 @@
 *    2.7 - Loading external data
 */
 
-d3.tsv("data/ages.tsv").then(function(data){
-    data.forEach(function(d){
-        d.age = +d.age;
-    });
+d3.json("/data/ages.json").then(data => {
+	data.forEach(d => {
+		d.age = Number(d.age)
+	})
+	
+	const svg = d3.select("#chart-area").append("svg")
+	.attr("width", 400)
+	.attr("height", 400)
 
-    var svg = d3.select("#chart-area").append("svg")
-        .attr("width", 400)
-        .attr("height", 400);
+	const circles = svg.selectAll("circle")
+		.data(data)
 
-    var circles = svg.selectAll("circle")
-        .data(data);
-
-    circles.enter()
-        .append("circle")
-            .attr("cx", function(d, i){
-                console.log(d);
-                return (i * 50) + 25;
-            })
-            .attr("cy", 25)
-            .attr("r", function(d){
-                return d.age * 2;
-            })
-            .attr("fill", function(d){
-                if (d.name == "Tony") {
-                    return "blue";
-                }
-                else {
-                    return "red";
-                }
-            });
-}).catch(function(error){
-    console.log(error);
+	circles.enter().append("circle")
+		.attr("cx", (d, i) => (i * 50) + 50)
+		.attr("cy", 250)
+		.attr("r", (d) => 2 * d.age)
+		.attr("fill", d => {
+			if (d.name === "Tony") {
+				return "blue"
+			}
+			else {
+				return "red"
+			}
+		})
+}).catch(error => {
+	console.log(error)
 })
