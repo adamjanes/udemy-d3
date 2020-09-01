@@ -42,6 +42,6 @@ d3.json("data/buildings.json").then(function(data){
         .attr("height", function(d){
             return y(d.height);
         })
-        .attr("fill", "grey");
+        .attr("fill", "red");
 
 });
