@@ -1,134 +1,123 @@
 /*
 *    barChart.js
 *    Mastering Data Visualization with D3.js
-*    FreedomCorp Dashboard
+*    Project 4 - FreedomCorp Dashboard
 */
 
-BarChart = function(_parentElement, _variable, _title){
-    this.parentElement = _parentElement;
-    this.variable = _variable;
-    this.title = _title;
+class BarChart {
+  constructor(_parentElement, _variable, _title) {
+    this.parentElement = _parentElement
+    this.variable = _variable
+    this.title = _title
 
-    this.initVis();
-};
+    this.initVis()
+  }
 
-BarChart.prototype.initVis = function(){
-    var vis = this;
+  initVis() {
+    const vis = this
 
-    vis.margin = { left:60, right:50, top:30, bottom:30 };
-    vis.height = 130 - vis.margin.top - vis.margin.bottom;
-    vis.width = 350 - vis.margin.left - vis.margin.right;
+    vis.MARGIN = { LEFT: 60, RIGHT: 50, TOP: 30, BOTTOM: 30 }
+    vis.WIDTH = 350 - vis.MARGIN.LEFT - vis.MARGIN.RIGHT
+    vis.HEIGHT = 130 - vis.MARGIN.TOP - vis.MARGIN.BOTTOM
 
-    vis.svg = d3.select(vis.parentElement)
-        .append("svg")
-        .attr("width", vis.width + vis.margin.left + vis.margin.right)
-        .attr("height", vis.height + vis.margin.top + vis.margin.bottom);
+    vis.svg = d3.select(vis.parentElement).append("svg")
+      .attr("width", vis.WIDTH + vis.MARGIN.LEFT + vis.MARGIN.RIGHT)
+      .attr("height", vis.HEIGHT + vis.MARGIN.TOP + vis.MARGIN.BOTTOM)
+
     vis.g = vis.svg.append("g")
-        .attr("transform", "translate(" + vis.margin.left + 
-            ", " + vis.margin.top + ")");
-
-    vis.t = () => { return d3.transition().duration(1000); }
+      .attr("transform", `translate(${vis.MARGIN.LEFT}, ${vis.MARGIN.TOP})`)
 
     vis.linePath = vis.g.append("path")
-        .attr("class", "line")
-        .attr("fill", "none")
-        .attr("stroke-width", "3px");
-
-    // vis.color = d3.scaleOrdinal(d3.schemeGreys[4]);
+      .attr("class", "line")
+      .attr("fill", "none")
+      .attr("stroke-width", "3px")
 
     vis.x = d3.scaleBand()
-        .domain(["electronics", "furniture", "appliances", "materials"])
-        .range([0, vis.width])
-        .padding(0.5);
+      .domain(["electronics", "furniture", "appliances", "materials"])
+      .range([0, vis.WIDTH])
+      .padding(0.5)
 
-    vis.y = d3.scaleLinear().range([vis.height, 0]);
-
+    vis.y = d3.scaleLinear().range([vis.HEIGHT, 0])
 
     function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+      return string.charAt(0).toUpperCase() + string.slice(1)
     }
 
     vis.yAxisCall = d3.axisLeft()
-        .ticks(4);
+      .ticks(4);
     vis.xAxisCall = d3.axisBottom()
-        .tickFormat(function(d) {
-            return "" + capitalizeFirstLetter(d);
-        });
+      .tickFormat(d => "" + capitalizeFirstLetter(d))
     vis.xAxis = vis.g.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + vis.height +")");
+      .attr("class", "x axis")
+      .attr("transform", `translate(0, ${vis.HEIGHT})`)
     vis.yAxis = vis.g.append("g")
-        .attr("class", "y axis");
+      .attr("class", "y axis")
 
     vis.g.append("text")
-        .attr("class", "title")
-        .attr("y", -15)
-        .attr("x", -50)
-        .attr("font-size", "12px")
-        .attr("text-anchor", "start")
-        .text(vis.title)
+      .attr("class", "title")
+      .attr("y", -15)
+      .attr("x", -50)
+      .attr("font-size", "12px")
+      .attr("text-anchor", "start")
+      .text(vis.title)
 
-    vis.wrangleData();
-};
+    vis.wrangleData()
+  }
 
 
-BarChart.prototype.wrangleData = function(){
-    var vis = this;
+  wrangleData() {
+    const vis = this
 
-    vis.dataFiltered = nestedCalls.map(function(category){
-        return {
-            category: category.key,
-            size: (category.values.reduce(function(accumulator, current){
-                return accumulator + current[vis.variable]
-            }, 0) / category.values.length)
-        }
+    vis.dataFiltered = nestedCalls.map(category => {
+      return {
+        category: category.key,
+        size: (category.values.reduce((accumulator, current) => 
+          accumulator + current[vis.variable], 0) / category.values.length)
+      }
     })
 
-    vis.updateVis();
-};
+    vis.updateVis()
+  }
 
+  updateVis() {
+    const vis = this
 
-BarChart.prototype.updateVis = function(){
-    var vis = this;
+    vis.t = d3.transition().duration(1000)
 
-    // Update scales
-    vis.y.domain([0, d3.max(vis.dataFiltered, (d) => { return +d.size; })]);
+    // update scales
+    vis.y.domain([0, d3.max(vis.dataFiltered, d => Number(d.size))])
 
-    // Update axes
-    vis.xAxisCall.scale(vis.x);
-    vis.xAxis.transition(vis.t()).call(vis.xAxisCall);
-    vis.yAxisCall.scale(vis.y);
-    vis.yAxis.transition(vis.t()).call(vis.yAxisCall);
+    // update axes
+    vis.xAxisCall.scale(vis.x)
+    vis.xAxis.transition(vis.t).call(vis.xAxisCall)
+    vis.yAxisCall.scale(vis.y)
+    vis.yAxis.transition(vis.t).call(vis.yAxisCall)
 
-    // JOIN new data with old elements.
-    vis.rects = vis.g.selectAll("rect").data(vis.dataFiltered, function(d){
-        return d.category;
-    });
+    vis.rects = vis.g.selectAll("rect")
+      .data(vis.dataFiltered, d => d.category)
 
-    // EXIT old elements not present in new data.
     vis.rects.exit()
-        .attr("class", "exit")
-        .transition(vis.t())
+      .attr("class", "exit")
+      .transition(vis.t)
         .attr("height", 0)
-        .attr("y", vis.height)
+        .attr("y", vis.HEIGHT)
         .style("fill-opacity", "0.1")
-        .remove();
+        .remove()
 
-    // UPDATE old elements present in new data.
-    vis.rects.attr("class", "update")
-        .transition(vis.t())
-            .attr("y", function(d){ return vis.y(d.size); })
-            .attr("height", function(d){ return (vis.height - vis.y(d.size)); })
-            .attr("x", function(d){ return vis.x(d.category) })
-            .attr("width", vis.x.bandwidth)
-
-    // ENTER new elements present in new data.
-    vis.rects.enter()
-        .append("rect")
-        .attr("class", "enter")
-        .attr("y", function(d){ return vis.y(d.size); })
-        .attr("height", function(d){ return (vis.height - vis.y(d.size)); })
-        .attr("x", function(d){ return vis.x(d.category) })
+    vis.rects
+      .attr("class", "update")
+      .transition(vis.t)
+        .attr("y", d => vis.y(d.size))
+        .attr("height", d => (vis.HEIGHT - vis.y(d.size)))
+        .attr("x", d => vis.x(d.category))
         .attr("width", vis.x.bandwidth)
-        .attr("fill", "grey")
-};
+
+    vis.rects.enter().append("rect")
+      .attr("class", "enter")
+      .attr("y", d => vis.y(d.size))
+      .attr("height", d => (vis.HEIGHT - vis.y(d.size)))
+      .attr("x", d => vis.x(d.category))
+      .attr("width", vis.x.bandwidth)
+      .attr("fill", "#ccc")
+  }
+}

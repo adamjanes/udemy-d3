@@ -17,8 +17,7 @@
   font: 10px sans-serif;
 }
 
-.axis path,
-.axis line {
+.axis path, .axis line {
   fill: none;
   stroke: #D4D8DA;
   stroke-width: 2px;
@@ -50,4 +49,10 @@
 #selections .col-md-4 {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.line {
+  fill: none;
+  stroke-width: 3px;
+  stroke: grey;
 }

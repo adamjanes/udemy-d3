@@ -11,7 +11,6 @@
 /* Creates a small triangle extender for the tooltip */
 .d3-tip:after {
   box-sizing: border-box;
-  display: inline;
   font-size: 10px;
   width: 100%;
   line-height: 1;

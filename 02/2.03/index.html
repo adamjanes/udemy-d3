@@ -1,45 +1,38 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <title>2.3 - Understanding SVGs</title>
-    <!-- Custom styling -->
-    <link rel="stylesheet" href="css/style.css">
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<title>2.3 - Understanding SVGs</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<!-- Custom styling -->
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<svg width="400" height="60">
+		<!-- "x" and "y" coordinates give a shape its position (top left hand corner) -->
+		<rect x="0" y="0" width="50" height="50" fill="green"></rect>
+		<!-- For circles, choose the center with "cx" and "cy", and the radius with "r" -->
+		<circle cx="90" cy="25" r="25" fill="red"></circle>
+		<!-- Ellipses are similar, but they take "ry" and "rx" attributes -->
+		<ellipse cx="145" cy="25" rx="15" ry="25" fill="grey"></ellipse>
+		<!-- Lines need two pairs of coordinates and a stroke width -->
+		<line x1="185" y1="5" x2="230" y2="40" stroke="blue" stroke-width="5"></line>
+		<!-- Text takes an x/y coordinate and a font size -->
+		<text x="260" y="25" font-size="20px" fill="orange">Hello World</text>
+	</svg>
+	<div>
+		<svg width="190" height="160" xmlns="http://www.w3.org/2000/svg">
+			<path d="M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80" stroke="black" fill="transparent"/>
+		</svg> 
+	</div>
 
-    <svg width="400" height="60">
-        <!-- "x" and "y" coordinates give a shape its position (top left hand corner) -->
-        <rect x="0" y="0" width="50" height="50" fill="green"></rect>
-
-        <!-- For circles, choose the center with "cx" and "cy", and the radius with "r" -->
-        <circle cx="90" cy="25" r="25" fill="red"></circle>
-
-        <!-- Ellipses are similar, but they take "ry" and "rx" attributes -->
-        <ellipse cx="145" cy="25" rx="15" ry="25" fill="grey"></ellipse>
-
-        <!-- Lines need two pairs of coordinates and a stroke width -->
-        <line x1="185" y1="5" x2="230" y2="40" stroke="blue" stroke-width="5"></line>
-
-        <!-- Text takes an x/y coordinate and a font size -->
-        <text x="260" y="25" font-size="20px" fill="orange">Hello World</text>
-    </svg>
-
-    <div>
-        <svg width="190" height="160" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80" stroke="black" fill="transparent"/>
-        </svg>   
-    </div>
-
+	<!-- External JS libraries -->
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
