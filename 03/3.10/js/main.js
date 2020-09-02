@@ -50,10 +50,8 @@ d3.json("data/buildings.json").then(function(data){
         .paddingOuter(0.3);
 
     var y = d3.scaleLinear()
-        .domain([0, d3.max(data, function(d){
-            return d.height;
-        })])
-        .range([0, height]);
+        .domain([0, d3.max(data, d => d.height)])
+        .range([height, 0]);
 
     var xAxisCall = d3.axisBottom(x);
     g.append("g")
@@ -77,13 +75,15 @@ d3.json("data/buildings.json").then(function(data){
 
     var rects = g.selectAll("rect")
         .data(data)
-    
+    console.log(height)
+	
     rects.enter()
         .append("rect")
-            .attr("y", 0)
+            .attr("y", function(d) {return y(d.height)})
             .attr("x", function(d){ return x(d.name); })
             .attr("width", x.bandwidth)
-            .attr("height", function(d){ return y(d.height); })
+			/* .attr("height", height) */
+            .attr("height", function(d) {return height - y(d.height)})
             .attr("fill", "grey");
 
 })

@@ -4,7 +4,7 @@
 *    3.11 - Making a bar chart
 */
 
-var margin = { left:100, right:10, top:10, bottom:150 };
+var margin = { left:80, right:20, top:50, bottom:100 };
 
 var width = 600 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
